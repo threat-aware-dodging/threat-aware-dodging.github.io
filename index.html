@@ -268,7 +268,6 @@
           <!-- TODO: 替换成真实链接 -->
           <a class="pill-btn primary" href="#" target="_blank" rel="noopener noreferrer">RA-L (IEEE Xplore)</a>
           <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">arXiv</a>
-          <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Video</a>
           <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Bilibili</a>
           <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Code</a>
         </div>
@@ -284,95 +283,28 @@
       <section id="abstract">
         <h2>Abstract</h2>
         <p>
-          Uncrewed aerial vehicles (UAVs) used for transportation, inspection, and aerial
-          photography remain vulnerable to intentional projectile attacks from humans.
-          Dodging sudden, fast projectiles is challenging because it requires ultra-low-latency
-          perception and agile maneuvers under uncertainty.
-        </p>
-        <p>
-          This work proposes a real-time threat-aware dodging framework that runs fully onboard
-          a UAV using only an RGB-D camera. The perception module,
-          <strong>Pose-Aware Projectile Trajectory Prediction (PAPT)</strong>,
-          integrates large-scale pretrained human pose estimation with depth sensing
-          to predict both the attacker’s motion trajectory and the subsequent projectile trajectory
-          before the projectile even becomes clearly visible.
-        </p>
-        <p>
-          The planning module, <strong>Uncertainty-Aware Dodging (UAD)</strong>, introduces
-          an ivory-shaped uncertainty model that expands an ideal parabolic trajectory into a
-          temporally growing risk region and optimizes the UAV trajectory with penalties on
-          proximity and relative velocity to all surviving projectile trajectories.
-        </p>
-        <p>
-          Deployed on a CPU-only onboard computer, the system achieves a
-          <strong>6&nbsp;m effective detection range</strong> and an average
-          <strong>26.4&nbsp;ms prediction latency</strong>, and outperforms an RGB-D baseline
-          in both distance and responsiveness. Extensive real-world experiments show reliable
-          dodging performance across diverse distances, speeds, lighting and occlusion conditions,
-          attacker styles, and projectile types, with success rates exceeding
-          <strong>90&nbsp;%</strong> in most realistic human-initiated attack scenarios.
+          Uncrewed aerial vehicles (UAVs) performing tasks
+such as transportation and aerial photography are vulnerable
+to intentional projectile attacks from humans. Dodging such
+a sudden and fast projectile poses a significant challenge for
+UAVs, requiring ultra-low latency responses and agile maneuvers.
+Drawing inspiration from baseball, in which pitchers’ body move-
+ments are analyzed to predict the ball’s trajectory, we propose a
+novel real-time dodging system that leverages an RGB-D camera.
+Our approach integrates human pose estimation with depth
+information to predict the attacker’s motion trajectory and the
+subsequent projectile trajectory. Additionally, we introduce an
+uncertainty-aware dodging strategy to enable the UAV to dodge
+incoming projectiles efficiently. Our perception system achieves
+high prediction accuracy and outperforms the baseline in effective
+distance and latency. The dodging strategy addresses temporal
+and spatial uncertainties to ensure UAV safety. Extensive real-
+world experiments demonstrate the framework’s reliable dodging
+capabilities against sudden attacks and its outstanding robustness
+across diverse scenarios.
         </p>
       </section>
 
-      <!-- Overview / System -->
-      <section id="overview">
-        <h2>System Overview</h2>
-        <div class="section-subtitle">
-          PAPT + UAD: from human pose to safe evasive trajectories.
-        </div>
-        <p>
-          The proposed system runs entirely onboard a quadrotor equipped with an Intel RealSense
-          D455 RGB-D camera, a small form-factor CPU computer, and a PX4-based flight controller.
-          RGB-D streams feed into PAPT, which tracks 3D body keypoints and predicts candidate
-          projectile trajectories in real time. UAD then plans smooth, dynamically feasible
-          dodging trajectories that keep the UAV outside the evolving risk region.
-        </p>
-        <div class="image-row">
-          <div class="image-card">
-            <!-- 建议放 overview figure (Fig.2) -->
-            <!-- <img src="assets/overview_32.png" alt="System overview of PAPT and UAD"> -->
-          </div>
-          <div class="image-card">
-            <!-- 建议放 ivory-shaped uncertainty figure -->
-            <!-- <img src="assets/Ivory-shaped.png" alt="Ivory-shaped uncertainty region around projectile trajectory"> -->
-          </div>
-        </div>
-        <p>
-          The framework is modular: perception outputs (keypoint trajectories and projectile
-          hypotheses) are decoupled from planning, allowing straightforward transfer to
-          different UAV platforms and control stacks.
-        </p>
-      </section>
-
-      <!-- Key Contributions -->
-      <section id="contributions">
-        <h2>Key Contributions</h2>
-        <ul style="margin: 4px 0 0 16px; padding-left: 0; font-size: 0.95rem; color: #333;">
-          <li style="margin-bottom: 4px;">
-            <strong>Threat-aware dodging system:</strong>
-            a complete onboard framework that allows a UAV to dodge human-thrown projectiles
-            using only an RGB-D camera, without relying on event cameras or expensive LiDAR.
-          </li>
-          <li style="margin-bottom: 4px;">
-            <strong>Pose-Aware Projectile Trajectory Prediction (PAPT):</strong>
-            a real-time perception pipeline that integrates 2D human pose estimation (RTMPose)
-            with depth sensing to track 3D keypoints, smooth pre-release trajectories,
-            and conservatively predict post-release projectile motion.
-          </li>
-          <li style="margin-bottom: 4px;">
-            <strong>Uncertainty-Aware Dodging (UAD):</strong>
-            an ivory-shaped uncertainty model and optimization objective that penalize
-            proximity and adverse relative velocity to all surviving projectile trajectories,
-            enabling safe evasive maneuvers under temporal and spatial uncertainty.
-          </li>
-          <li>
-            <strong>Extensive real-world validation:</strong>
-            comprehensive experiments across distances, attack angles, lighting and occlusion
-            conditions, different attackers, and diverse projectile types, including dual-attacker
-            cases, demonstrating robust dodging performance on a low-cost CPU platform.
-          </li>
-        </ul>
-      </section>
 
       <!-- Experiments -->
       <section id="experiments">
