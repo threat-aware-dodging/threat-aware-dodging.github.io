@@ -78,7 +78,7 @@
     .authors {
       font-size: 0.95rem;
       line-height: 1.6;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       color: var(--muted);
     }
 
@@ -97,7 +97,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 12px;
     }
 
     .pill-btn {
@@ -174,7 +174,6 @@
       color: #333333;
     }
 
-    /* 小标题辅助 */
     .section-subtitle {
       font-size: 0.9rem;
       color: var(--muted);
@@ -285,36 +284,40 @@
           Threat-Aware UAV Dodging of Human-Thrown Projectiles with an RGB-D Camera
         </h1>
         <div class="hero-subtitle">
-          IEEE R-AL, 2025
+          IEEE Robotics and Automation Letters (RA-L), 2025 &nbsp;&middot;&nbsp; Accepted November 20, 2025
         </div>
 
         <div class="authors">
-          <a href="#" target="_blank" rel="noopener noreferrer">Yuying Zhang*</a><sup>*</sup>&nbsp;&nbsp;
-          <a href="#" target="_blank" rel="noopener noreferrer">Na Fan*</a><sup>*</sup>&nbsp;&nbsp;
-          <a href="#" target="_blank" rel="noopener noreferrer">Haowen Zheng</a><sup>*</sup>&nbsp;&nbsp;
-          <a href="#" target="_blank" rel="noopener noreferrer">Junning Liang</a><sup>*</sup>&nbsp;&nbsp;
-          <a href="#" target="_blank" rel="noopener noreferrer">Zongliang Pan</a><sup>*</sup>&nbsp;&nbsp;
-          <a href="#" target="_blank" rel="noopener noreferrer">Qifeng Chen</a><sup>*</sup>&nbsp;&nbsp;
-          <a href="#" target="_blank" rel="noopener noreferrer">Ximin Lyu✉</a>&nbsp;&nbsp;
-          Fourth Author&nbsp;&nbsp;
-          Fifth Author&nbsp;&nbsp;
-          <a href="#" target="_blank" rel="noopener noreferrer">Last Author</a><sup>✉</sup>
+          <a href="#" target="_blank" rel="noopener noreferrer">Yuying Zhang</a><sup>1,*</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Na Fan</a><sup>2,*</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Haowen Zheng</a><sup>1</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Juning Liang</a><sup>1</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Zongliang Pan</a><sup>3</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Qifeng Chen</a><sup>2</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Ximin Lyu</a><sup>1,✉</sup>
         </div>
         <div class="note-star">
-          * Equal contribution &nbsp;&nbsp; ✉ Corresponding author
+          * Co-first authors. &nbsp;&middot;&nbsp; ✉ Corresponding author.
+        </div>
+        <div class="note-star">
+          <sup>1</sup>School of Intelligent Systems Engineering, Sun Yat-sen University, China &nbsp;&middot;&nbsp;
+          <sup>2</sup>HKUST Visual Intelligence Lab, Hong Kong SAR &nbsp;&middot;&nbsp;
+          <sup>3</sup>Shenzhen ePropulsion Technology Ltd.
         </div>
 
         <div class="link-row">
-          <a class="pill-btn primary" href="https://arxiv.org/" target="_blank" rel="noopener noreferrer">arXiv</a>
+          <!-- TODO: 替换成真实链接 -->
+          <a class="pill-btn primary" href="#" target="_blank" rel="noopener noreferrer">RA-L (IEEE Xplore)</a>
+          <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">arXiv</a>
           <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Video</a>
           <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Bilibili</a>
           <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Code</a>
         </div>
 
         <div class="hero-media">
-          <!-- 用你自己的封面图替换 src -->
-          <!-- <img src="assets/teaser.png" alt="Teaser figure"> -->
-          Teaser Image Placeholder (16:9)
+          <!-- 建议放 Fig.1 cover 图 -->
+          <!-- <img src="assets/cover_031.jpg" alt="UAV dodging a fast tennis ball attack"> -->
+          Teaser: UAV dodging a human-thrown tennis ball (cover image)
         </div>
       </header>
 
@@ -322,101 +325,253 @@
       <section id="abstract">
         <h2>Abstract</h2>
         <p>
-          Uncrewed aerial vehicles (UAVs) performing tasks such as transportation and aerial 
-          photography are vulnerable to intentional projectile attacks from humans. 
-          Dodging such a sudden and fast projectile poses a significant challenge for UAVs, 
-          requiring ultra-low latency responses and agile maneuvers. 
-          Drawing inspiration from baseball, in which pitchers' body movements are analyzed 
-          to predict the ball's trajectory, we propose a novel real-time dodging system that 
-          leverages an RGB-D camera. Our approach integrates human pose estimation with depth information
-          to predict the attacker's motion trajectory and the subsequent projectile trajectory.
-          Additionally, we introduce an uncertainty-aware dodging strategy to enable 
-          the UAV to dodge incoming projectiles efficiently. Our perception system achieves 
-          high prediction accuracy and outperforms the baseline in effective distance and latency. 
-          The dodging strategy addresses temporal and spatial uncertainties to ensure UAV safety. 
-          Extensive real-world experiments demonstrate the framework's reliable dodging capabilities
-          against sudden attacks and its outstanding robustness across diverse scenarios.
+          Uncrewed aerial vehicles (UAVs) used for transportation, inspection, and aerial
+          photography remain vulnerable to intentional projectile attacks from humans.
+          Dodging sudden, fast projectiles is challenging because it requires ultra-low-latency
+          perception and agile maneuvers under uncertainty.
         </p>
         <p>
-          This template shows how to structure a project page with a clean single-column layout,
-          hero section, result figures, experiment videos, and a BibTeX block. Replace this text
-          with your actual abstract.
+          This work proposes a real-time threat-aware dodging framework that runs fully onboard
+          a UAV using only an RGB-D camera. The perception module,
+          <strong>Pose-Aware Projectile Trajectory Prediction (PAPT)</strong>,
+          integrates large-scale pretrained human pose estimation with depth sensing
+          to predict both the attacker’s motion trajectory and the subsequent projectile trajectory
+          before the projectile even becomes clearly visible.
+        </p>
+        <p>
+          The planning module, <strong>Uncertainty-Aware Dodging (UAD)</strong>, introduces
+          an ivory-shaped uncertainty model that expands an ideal parabolic trajectory into a
+          temporally growing risk region and optimizes the UAV trajectory with penalties on
+          proximity and relative velocity to all surviving projectile trajectories.
+        </p>
+        <p>
+          Deployed on a CPU-only onboard computer, the system achieves a
+          <strong>6&nbsp;m effective detection range</strong> and an average
+          <strong>26.4&nbsp;ms prediction latency</strong>, and outperforms an RGB-D baseline
+          in both distance and responsiveness. Extensive real-world experiments show reliable
+          dodging performance across diverse distances, speeds, lighting and occlusion conditions,
+          attacker styles, and projectile types, with success rates exceeding
+          <strong>90&nbsp;%</strong> in most realistic human-initiated attack scenarios.
         </p>
       </section>
 
-      <!-- Real-World Result -->
-      <section id="results">
-        <h2>Real-World Result</h2>
-        <div class="section-subtitle">Representative snapshots from real-world experiments.</div>
+      <!-- Overview / System -->
+      <section id="overview">
+        <h2>System Overview</h2>
+        <div class="section-subtitle">
+          PAPT + UAD: from human pose to safe evasive trajectories.
+        </div>
+        <p>
+          The proposed system runs entirely onboard a quadrotor equipped with an Intel RealSense
+          D455 RGB-D camera, a small form-factor CPU computer, and a PX4-based flight controller.
+          RGB-D streams feed into PAPT, which tracks 3D body keypoints and predicts candidate
+          projectile trajectories in real time. UAD then plans smooth, dynamically feasible
+          dodging trajectories that keep the UAV outside the evolving risk region.
+        </p>
         <div class="image-row">
           <div class="image-card">
-            <!-- <img src="assets/real1.jpg" alt="Real-world result 1"> -->
+            <!-- 建议放 overview figure (Fig.2) -->
+            <!-- <img src="assets/overview_32.png" alt="System overview of PAPT and UAD"> -->
           </div>
           <div class="image-card">
-            <!-- <img src="assets/real2.jpg" alt="Real-world result 2"> -->
+            <!-- 建议放 ivory-shaped uncertainty figure -->
+            <!-- <img src="assets/Ivory-shaped.png" alt="Ivory-shaped uncertainty region around projectile trajectory"> -->
           </div>
         </div>
+        <p>
+          The framework is modular: perception outputs (keypoint trajectories and projectile
+          hypotheses) are decoupled from planning, allowing straightforward transfer to
+          different UAV platforms and control stacks.
+        </p>
       </section>
 
-      <!-- Real-World Experiments -->
+      <!-- Key Contributions -->
+      <section id="contributions">
+        <h2>Key Contributions</h2>
+        <ul style="margin: 4px 0 0 16px; padding-left: 0; font-size: 0.95rem; color: #333;">
+          <li style="margin-bottom: 4px;">
+            <strong>Threat-aware dodging system:</strong>
+            a complete onboard framework that allows a UAV to dodge human-thrown projectiles
+            using only an RGB-D camera, without relying on event cameras or expensive LiDAR.
+          </li>
+          <li style="margin-bottom: 4px;">
+            <strong>Pose-Aware Projectile Trajectory Prediction (PAPT):</strong>
+            a real-time perception pipeline that integrates 2D human pose estimation (RTMPose)
+            with depth sensing to track 3D keypoints, smooth pre-release trajectories,
+            and conservatively predict post-release projectile motion.
+          </li>
+          <li style="margin-bottom: 4px;">
+            <strong>Uncertainty-Aware Dodging (UAD):</strong>
+            an ivory-shaped uncertainty model and optimization objective that penalize
+            proximity and adverse relative velocity to all surviving projectile trajectories,
+            enabling safe evasive maneuvers under temporal and spatial uncertainty.
+          </li>
+          <li>
+            <strong>Extensive real-world validation:</strong>
+            comprehensive experiments across distances, attack angles, lighting and occlusion
+            conditions, different attackers, and diverse projectile types, including dual-attacker
+            cases, demonstrating robust dodging performance on a low-cost CPU platform.
+          </li>
+        </ul>
+      </section>
+
+      <!-- PAPT -->
+      <section id="papt">
+        <h2>Pose-Aware Projectile Trajectory Prediction (PAPT)</h2>
+        <p>
+          PAPT receives synchronized RGB and depth images and uses RTMPose to detect 2D joint
+          locations such as wrists and shoulders. These 2D keypoints are lifted into 3D using
+          the depth map, camera intrinsics, and the calibrated camera-to-world transformation.
+          Spatial and temporal filtering improve robustness against depth noise.
+        </p>
+        <p>
+          Recent valid 3D keypoint trajectories are then smoothed by cubic splines along each axis.
+          From the smoothed positions, PAPT derives keypoint velocities and accelerations and scans
+          for candidate release times when acceleration exceeds a threshold and aligns with velocity.
+          Each candidate release time spawns an ideal parabolic projectile trajectory that serves as
+          a hypothesis for UAD.
+        </p>
+        <p>
+          In controlled experiments using a motion capture system, PAPT achieves sub-centimeter
+          mean position errors in the horizontal directions and an overall position RMSE of
+          <strong>3.7&nbsp;cm</strong>, with velocity RMSE around <strong>0.15&nbsp;m/s</strong>,
+          which is sufficient for reliable dodging at human throwing speeds.
+        </p>
+      </section>
+
+      <!-- UAD -->
+      <section id="uad">
+        <h2>Uncertainty-Aware Dodging (UAD)</h2>
+        <p>
+          Exact projectile trajectories are difficult to predict due to uncertainties in release
+          conditions, aerodynamics, and sensing. UAD therefore wraps each ideal parabolic trajectory
+          in an <strong>ivory-shaped uncertainty region</strong>, where the radius
+          <code>R(t) = α t² + β t + γ</code> grows over time to capture accumulated errors.
+          Collisions occur when the UAV’s position or planned trajectory intersects this region.
+        </p>
+        <p>
+          The UAV trajectory is parameterized as a MINCO polynomial and optimized with a cost that
+          combines smoothness, dynamic feasibility, static obstacle avoidance, and two new terms:
+        </p>
+        <ul style="margin: 4px 0 0 16px; padding-left: 0; font-size: 0.95rem; color: #333;">
+          <li style="margin-bottom: 4px;">
+            <strong>Distance penalty</strong> &mdash; discourages the UAV from entering the
+            uncertainty region around any surviving projectile trajectory.
+          </li>
+          <li>
+            <strong>Relative velocity penalty</strong> &mdash; reduces the component of relative
+            velocity along the line of approach, encouraging lateral dodging motions that
+            increase separation.
+          </li>
+        </ul>
+        <p>
+          UAD continuously replans as surviving projectile trajectories are updated, which allows
+          the UAV to both avoid collisions and efficiently converge to the goal.
+        </p>
+      </section>
+
+      <!-- Experiments -->
       <section id="experiments">
-        <h2>Real-World Experiments</h2>
-        <div class="section-subtitle">(playing speed: 1×)</div>
-
-        <div class="video-grid">
-          <!-- 每个 tile 可以用 iframe / video / gif / 图片 -->
-          <div class="video-tile">
-            <!-- 示例：YouTube iframe -->
-            <!--
-            <iframe
-              src="https://www.youtube.com/embed/XXXXXXXXXXX"
-              title="Strike Task"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-            -->
-            <span class="video-label">Strike Task</span>
-            Strike Task Placeholder
-          </div>
-
-          <div class="video-tile">
-            <span class="video-label">Cross Task</span>
-            Cross Task Placeholder
-          </div>
-
-          <div class="video-tile">
-            <span class="video-label">Grasp Task</span>
-            Grasp Task Placeholder
-          </div>
-
-          <div class="video-tile">
-            <span class="video-label">Lift Task</span>
-            Lift Task Placeholder
-          </div>
-
-          <!-- 根据需要继续添加：Press, Pull, Push, Wind, Write... -->
+        <h2>Experiments</h2>
+        <div class="section-subtitle">
+          Real-world tests on a 1.35&nbsp;kg quadrotor with an Intel RealSense D455 and CPU-only onboard computing.
         </div>
+        <p>
+          The hardware platform is a 1.35&nbsp;kg quadrotor (240&nbsp;&times;&nbsp;240&nbsp;&times;&nbsp;105&nbsp;mm)
+          equipped with an Intel RealSense D455 RGB-D camera, a Minisforum EM780 (Ryzen 7&nbsp;7840U CPU),
+          and an NxtPX4v2 flight controller. All perception and planning run onboard.
+        </p>
+        <div class="video-grid">
+          <div class="video-tile">
+            <!-- Hovering scenario video / gif -->
+            <!-- <video src="assets/hover_dodge.mp4" autoplay loop muted></video> -->
+            <span class="video-label">Hovering dodging</span>
+            Hovering dodging placeholder
+          </div>
+          <div class="video-tile">
+            <!-- Navigation with obstacles -->
+            <!-- <video src="assets/flight_dodge_obstacles.mp4" autoplay loop muted></video> -->
+            <span class="video-label">Flight with obstacles</span>
+            Flight with obstacles placeholder
+          </div>
+          <div class="video-tile">
+            <!-- Multi-attacker -->
+            <!-- <video src="assets/multi_attacker.mp4" autoplay loop muted></video> -->
+            <span class="video-label">Multi-attacker</span>
+            Multi-attacker placeholder
+          </div>
+          <div class="video-tile">
+            <!-- Different projectiles -->
+            <!-- <video src="assets/multi_projectiles.mp4" autoplay loop muted></video> -->
+            <span class="video-label">Various projectiles</span>
+            Various projectiles placeholder
+          </div>
+        </div>
+        <p>
+          In hovering scenarios, the UAV dodges tennis balls thrown from 3–6&nbsp;m with
+          different attack angles. By grouping trials into speed bands, the system maintains
+          success rates of <strong>≥&nbsp;95&nbsp;%</strong> for low and medium speeds and
+          <strong>≥&nbsp;81&nbsp;%</strong> even at extreme speeds up to
+          <strong>13.29&nbsp;m/s</strong>, depending on distance.
+        </p>
+        <p>
+          The framework also handles:
+        </p>
+        <ul style="margin: 4px 0 0 16px; padding-left: 0; font-size: 0.95rem; color: #333;">
+          <li style="margin-bottom: 4px;">
+            Diverse throwing styles and joint configurations (visible/hidden, left/right hand, different arm swings),
+            with low variance in success rates.
+          </li>
+          <li style="margin-bottom: 4px;">
+            Multiple attackers and multiple projectile types (tennis ball, 3D-printed part, bottle,
+            loopy toy, football, slipper), showing strong generalization without retraining.
+          </li>
+          <li>
+            Occlusion conditions (partial-arm, half-body, full-body), where the system still
+            achieves an average success rate of about <strong>93.6&nbsp;%</strong>.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Results vs Baseline -->
+      <section id="results">
+        <h2>Comparison with RGB-D Baseline</h2>
+        <p>
+          We reimplement the RGB-D method of Lu et&nbsp;al. (2022 RA-L) on our hardware for a
+          fair comparison. On CPU, that baseline reaches an effective detection distance of
+          about <strong>4.2&nbsp;m</strong> and an average latency of
+          <strong>320&nbsp;ms</strong>, whereas our PAPT achieves
+          <strong>6.0&nbsp;m</strong> and <strong>26.4&nbsp;ms</strong>, respectively.
+        </p>
+        <p>
+          In simulated replay experiments with real flight logs, our full system achieves a dodging
+          success rate of <strong>96.67&nbsp;%</strong>, while the baseline remains around
+          <strong>60&nbsp;%</strong> due to later perception and lack of uncertainty-aware planning.
+          Timeline analyses show that our method often starts planning before the ball is even
+          released, whereas the baseline only reacts after the ball is already in mid-air.
+        </p>
       </section>
 
       <!-- BibTeX -->
       <section id="bibtex">
         <h2>BibTeX</h2>
         <div class="code-block">
-@article{yourkey2025yourpaper,
+@article{zhang2025threatawareuav,
   title   = {Threat-Aware UAV Dodging of Human-Thrown Projectiles with an RGB-D Camera},
-  author  = {First Author and Second Author and Third Author and Fourth Author and Fifth Author and Last Author},
-  journal = {IEEE Transactions on Robotics},
+  author  = {Zhang, Yuying and Fan, Na and Zheng, Haowen and Liang, Juning
+             and Pan, Zongliang and Chen, Qifeng and Lyu, Ximin},
+  journal = {IEEE Robotics and Automation Letters},
   year    = {2025},
-  volume  = {XX},
-  number  = {YY},
+  volume  = {X},
+  number  = {Y},
   pages   = {1--12},
-  doi     = {10.1109/TRO.2025.XXXXXXX},
+  doi     = {10.1109/LRA.2025.XXXXXXX}
 }
         </div>
       </section>
 
       <div class="footer-note">
-        Last updated: 2025-11-24 · Template for academic project pages
+        Last updated: 2025-11-24 · RA-L preprint project page for “Threat-Aware UAV Dodging of Human-Thrown Projectiles with an RGB-D Camera”
       </div>
     </main>
   </div>
