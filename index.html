@@ -203,6 +203,41 @@
       display: block;
     }
 
+    /* 视频网格 */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .video-tile {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      color: #bbbbbb;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+    }
+
+    .video-label {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.55);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
 
     /* BibTeX 样式 */
     .code-block {
@@ -309,64 +344,32 @@ across diverse scenarios.
       <!-- Experiments -->
       <section id="experiments">
         <h2>Experiments</h2>
-        <div class="section-subtitle">
-          Real-world tests on a 1.35&nbsp;kg quadrotor with an Intel RealSense D455 and CPU-only onboard computing.
-        </div>
-        <p>
-          The hardware platform is a 1.35&nbsp;kg quadrotor (240&nbsp;&times;&nbsp;240&nbsp;&times;&nbsp;105&nbsp;mm)
-          equipped with an Intel RealSense D455 RGB-D camera, a Minisforum EM780 (Ryzen 7&nbsp;7840U CPU),
-          and an NxtPX4v2 flight controller. All perception and planning run onboard.
-        </p>
         <div class="video-grid">
           <div class="video-tile">
-            <!-- Hovering scenario video / gif -->
-            <!-- <video src="assets/hover_dodge.mp4" autoplay loop muted></video> -->
-            <span class="video-label">Hovering dodging</span>
-            Hovering dodging placeholder
+            <span class="video-label">Clip 1</span>
+            Video placeholder
           </div>
           <div class="video-tile">
-            <!-- Navigation with obstacles -->
-            <!-- <video src="assets/flight_dodge_obstacles.mp4" autoplay loop muted></video> -->
-            <span class="video-label">Flight with obstacles</span>
-            Flight with obstacles placeholder
+            <span class="video-label">Clip 2</span>
+            Video placeholder
           </div>
           <div class="video-tile">
-            <!-- Multi-attacker -->
-            <!-- <video src="assets/multi_attacker.mp4" autoplay loop muted></video> -->
-            <span class="video-label">Multi-attacker</span>
-            Multi-attacker placeholder
+            <span class="video-label">Clip 3</span>
+            Video placeholder
           </div>
           <div class="video-tile">
-            <!-- Different projectiles -->
-            <!-- <video src="assets/multi_projectiles.mp4" autoplay loop muted></video> -->
-            <span class="video-label">Various projectiles</span>
-            Various projectiles placeholder
+            <span class="video-label">Clip 4</span>
+            Video placeholder
+          </div>
+          <div class="video-tile">
+            <span class="video-label">Clip 5</span>
+            Video placeholder
+          </div>
+          <div class="video-tile">
+            <span class="video-label">Clip 6</span>
+            Video placeholder
           </div>
         </div>
-        <p>
-          In hovering scenarios, the UAV dodges tennis balls thrown from 3–6&nbsp;m with
-          different attack angles. By grouping trials into speed bands, the system maintains
-          success rates of <strong>≥&nbsp;95&nbsp;%</strong> for low and medium speeds and
-          <strong>≥&nbsp;81&nbsp;%</strong> even at extreme speeds up to
-          <strong>13.29&nbsp;m/s</strong>, depending on distance.
-        </p>
-        <p>
-          The framework also handles:
-        </p>
-        <ul style="margin: 4px 0 0 16px; padding-left: 0; font-size: 0.95rem; color: #333;">
-          <li style="margin-bottom: 4px;">
-            Diverse throwing styles and joint configurations (visible/hidden, left/right hand, different arm swings),
-            with low variance in success rates.
-          </li>
-          <li style="margin-bottom: 4px;">
-            Multiple attackers and multiple projectile types (tennis ball, 3D-printed part, bottle,
-            loopy toy, football, slipper), showing strong generalization without retraining.
-          </li>
-          <li>
-            Occlusion conditions (partial-arm, half-body, full-body), where the system still
-            achieves an average success rate of about <strong>93.6&nbsp;%</strong>.
-          </li>
-        </ul>
       </section>
 
 
