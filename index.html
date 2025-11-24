@@ -203,47 +203,6 @@
       display: block;
     }
 
-    /* 视频 / gif 网格 */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .video-tile {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #000;
-      aspect-ratio: 16 / 9;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #bbbbbb;
-      font-size: 0.85rem;
-    }
-
-    .video-tile iframe,
-    .video-tile video,
-    .video-tile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border: 0;
-    }
-
-    .video-label {
-      position: absolute;
-      left: 10px;
-      bottom: 8px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #ffffff;
-      font-size: 0.75rem;
-    }
 
     /* BibTeX 样式 */
     .code-block {
@@ -415,61 +374,6 @@
         </ul>
       </section>
 
-      <!-- PAPT -->
-      <section id="papt">
-        <h2>Pose-Aware Projectile Trajectory Prediction (PAPT)</h2>
-        <p>
-          PAPT receives synchronized RGB and depth images and uses RTMPose to detect 2D joint
-          locations such as wrists and shoulders. These 2D keypoints are lifted into 3D using
-          the depth map, camera intrinsics, and the calibrated camera-to-world transformation.
-          Spatial and temporal filtering improve robustness against depth noise.
-        </p>
-        <p>
-          Recent valid 3D keypoint trajectories are then smoothed by cubic splines along each axis.
-          From the smoothed positions, PAPT derives keypoint velocities and accelerations and scans
-          for candidate release times when acceleration exceeds a threshold and aligns with velocity.
-          Each candidate release time spawns an ideal parabolic projectile trajectory that serves as
-          a hypothesis for UAD.
-        </p>
-        <p>
-          In controlled experiments using a motion capture system, PAPT achieves sub-centimeter
-          mean position errors in the horizontal directions and an overall position RMSE of
-          <strong>3.7&nbsp;cm</strong>, with velocity RMSE around <strong>0.15&nbsp;m/s</strong>,
-          which is sufficient for reliable dodging at human throwing speeds.
-        </p>
-      </section>
-
-      <!-- UAD -->
-      <section id="uad">
-        <h2>Uncertainty-Aware Dodging (UAD)</h2>
-        <p>
-          Exact projectile trajectories are difficult to predict due to uncertainties in release
-          conditions, aerodynamics, and sensing. UAD therefore wraps each ideal parabolic trajectory
-          in an <strong>ivory-shaped uncertainty region</strong>, where the radius
-          <code>R(t) = α t² + β t + γ</code> grows over time to capture accumulated errors.
-          Collisions occur when the UAV’s position or planned trajectory intersects this region.
-        </p>
-        <p>
-          The UAV trajectory is parameterized as a MINCO polynomial and optimized with a cost that
-          combines smoothness, dynamic feasibility, static obstacle avoidance, and two new terms:
-        </p>
-        <ul style="margin: 4px 0 0 16px; padding-left: 0; font-size: 0.95rem; color: #333;">
-          <li style="margin-bottom: 4px;">
-            <strong>Distance penalty</strong> &mdash; discourages the UAV from entering the
-            uncertainty region around any surviving projectile trajectory.
-          </li>
-          <li>
-            <strong>Relative velocity penalty</strong> &mdash; reduces the component of relative
-            velocity along the line of approach, encouraging lateral dodging motions that
-            increase separation.
-          </li>
-        </ul>
-        <p>
-          UAD continuously replans as surviving projectile trajectories are updated, which allows
-          the UAV to both avoid collisions and efficiently converge to the goal.
-        </p>
-      </section>
-
       <!-- Experiments -->
       <section id="experiments">
         <h2>Experiments</h2>
@@ -533,24 +437,6 @@
         </ul>
       </section>
 
-      <!-- Results vs Baseline -->
-      <section id="results">
-        <h2>Comparison with RGB-D Baseline</h2>
-        <p>
-          We reimplement the RGB-D method of Lu et&nbsp;al. (2022 RA-L) on our hardware for a
-          fair comparison. On CPU, that baseline reaches an effective detection distance of
-          about <strong>4.2&nbsp;m</strong> and an average latency of
-          <strong>320&nbsp;ms</strong>, whereas our PAPT achieves
-          <strong>6.0&nbsp;m</strong> and <strong>26.4&nbsp;ms</strong>, respectively.
-        </p>
-        <p>
-          In simulated replay experiments with real flight logs, our full system achieves a dodging
-          success rate of <strong>96.67&nbsp;%</strong>, while the baseline remains around
-          <strong>60&nbsp;%</strong> due to later perception and lack of uncertainty-aware planning.
-          Timeline analyses show that our method often starts planning before the ball is even
-          released, whereas the baseline only reacts after the ball is already in mid-air.
-        </p>
-      </section>
 
       <!-- BibTeX -->
       <section id="bibtex">
