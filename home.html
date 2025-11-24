@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Threat-Aware UAV Dodging of Human-Thrown Projectiles with an RGB-D Camera</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f7f7;
+      --card-bg: #ffffff;
+      --text: #222222;
+      --muted: #666666;
+      --accent: #0059ff;
+      --accent-soft: #e3ecff;
+      --border: #dddddd;
+      --code-bg: #111111;
+      --max-width: 960px;
+      --radius: 12px;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 32px 16px 64px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+    }
+
+    /* 顶部信息卡片 */
+    .hero-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px 24px 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      margin-bottom: 32px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 2.4vw + 1.4rem, 2.5rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 0 0 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .authors {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+
+    .authors a {
+      font-weight: 500;
+    }
+
+    .note-star {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* 按钮组 */
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: #fafafa;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
+    }
+    .pill-btn.primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: transparent;
+    }
+    .pill-btn:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      background: #ffffff;
+    }
+    .pill-btn.primary:hover {
+      background: #0040c0;
+    }
+
+    /* 封面图 */
+    .hero-media {
+      margin-top: 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbbbbb;
+      font-size: 0.9rem;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 普通 section */
+    section {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 20px 20px 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    section h2 {
+      font-size: 1.1rem;
+      margin: 0 0 10px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    section p {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #333333;
+    }
+
+    /* 小标题辅助 */
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: -4px;
+      margin-bottom: 12px;
+    }
+
+    /* 图片网格 */
+    .image-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .image-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 视频 / gif 网格 */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .video-tile {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbbbbb;
+      font-size: 0.85rem;
+    }
+
+    .video-tile iframe,
+    .video-tile video,
+    .video-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+    }
+
+    .video-label {
+      position: absolute;
+      left: 10px;
+      bottom: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      font-size: 0.75rem;
+    }
+
+    /* BibTeX 样式 */
+    .code-block {
+      background: var(--code-bg);
+      color: #f5f5f5;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      line-height: 1.5;
+      white-space: pre;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      .hero-card {
+        padding: 24px 16px 18px;
+      }
+      section {
+        padding: 16px 12px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="container">
+      <!-- 顶部信息 -->
+      <header class="hero-card">
+        <h1 class="hero-title">
+          Threat-Aware UAV Dodging of Human-Thrown Projectiles with an RGB-D Camera
+        </h1>
+        <div class="hero-subtitle">
+          IEEE R-AL, 2025
+        </div>
+
+        <div class="authors">
+          <a href="#" target="_blank" rel="noopener noreferrer">Yuying Zhang</a><sup>*</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Second Author</a><sup>*</sup>&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Third Author</a>&nbsp;&nbsp;
+          Fourth Author&nbsp;&nbsp;
+          Fifth Author&nbsp;&nbsp;
+          <a href="#" target="_blank" rel="noopener noreferrer">Last Author</a><sup>✉</sup>
+        </div>
+        <div class="note-star">
+          * Equal contribution &nbsp;&nbsp; ✉ Corresponding author
+        </div>
+
+        <div class="link-row">
+          <a class="pill-btn primary" href="https://arxiv.org/" target="_blank" rel="noopener noreferrer">arXiv</a>
+          <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Video</a>
+          <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Bilibili</a>
+          <a class="pill-btn" href="#" target="_blank" rel="noopener noreferrer">Code</a>
+        </div>
+
+        <div class="hero-media">
+          <!-- 用你自己的封面图替换 src -->
+          <!-- <img src="assets/teaser.png" alt="Teaser figure"> -->
+          Teaser Image Placeholder (16:9)
+        </div>
+      </header>
+
+      <!-- Abstract -->
+      <section id="abstract">
+        <h2>Abstract</h2>
+        <p>
+          Expressive motion planning for aerial manipulators (AMs) is essential for tackling complex
+          manipulation tasks, yet achieving coupled trajectory planning that adapts to various tasks
+          remains challenging, especially for those requiring aggressive maneuvers.
+        </p>
+        <p>
+          This template shows how to structure a project page with a clean single-column layout,
+          hero section, result figures, experiment videos, and a BibTeX block. Replace this text
+          with your actual abstract.
+        </p>
+      </section>
+
+      <!-- Real-World Result -->
+      <section id="results">
+        <h2>Real-World Result</h2>
+        <div class="section-subtitle">Representative snapshots from real-world experiments.</div>
+        <div class="image-row">
+          <div class="image-card">
+            <!-- <img src="assets/real1.jpg" alt="Real-world result 1"> -->
+          </div>
+          <div class="image-card">
+            <!-- <img src="assets/real2.jpg" alt="Real-world result 2"> -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Real-World Experiments -->
+      <section id="experiments">
+        <h2>Real-World Experiments</h2>
+        <div class="section-subtitle">(playing speed: 1×)</div>
+
+        <div class="video-grid">
+          <!-- 每个 tile 可以用 iframe / video / gif / 图片 -->
+          <div class="video-tile">
+            <!-- 示例：YouTube iframe -->
+            <!--
+            <iframe
+              src="https://www.youtube.com/embed/XXXXXXXXXXX"
+              title="Strike Task"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+            -->
+            <span class="video-label">Strike Task</span>
+            Strike Task Placeholder
+          </div>
+
+          <div class="video-tile">
+            <span class="video-label">Cross Task</span>
+            Cross Task Placeholder
+          </div>
+
+          <div class="video-tile">
+            <span class="video-label">Grasp Task</span>
+            Grasp Task Placeholder
+          </div>
+
+          <div class="video-tile">
+            <span class="video-label">Lift Task</span>
+            Lift Task Placeholder
+          </div>
+
+          <!-- 根据需要继续添加：Press, Pull, Push, Wind, Write... -->
+        </div>
+      </section>
+
+      <!-- BibTeX -->
+      <section id="bibtex">
+        <h2>BibTeX</h2>
+        <div class="code-block">
+@article{yourkey2025yourpaper,
+  title   = {Threat-Aware UAV Dodging of Human-Thrown Projectiles with an RGB-D Camera},
+  author  = {First Author and Second Author and Third Author and Fourth Author and Fifth Author and Last Author},
+  journal = {IEEE Transactions on Robotics},
+  year    = {2025},
+  volume  = {XX},
+  number  = {YY},
+  pages   = {1--12},
+  doi     = {10.1109/TRO.2025.XXXXXXX},
+}
+        </div>
+      </section>
+
+      <div class="footer-note">
+        Last updated: 2025-11-24 · Template for academic project pages
+      </div>
+    </main>
+  </div>
+</body>
+</html>
