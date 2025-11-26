@@ -314,6 +314,14 @@
       color: var(--muted);
     }
 
+    .view-counter {
+      margin: 6px 10px 14px;
+      text-align: right;
+      font-size: 0.75rem;
+      color: var(--muted);
+      opacity: 0.65;
+    }
+
     @media (max-width: 640px) {
       .hero-card {
         padding: 24px 16px 18px;
@@ -485,5 +493,30 @@ across diverse scenarios.
       </div>
     </main>
   </div>
+
+  <div class="view-counter" id="view-counter">Loading view count…</div>
+
+  <script>
+    // Simple view counter using countapi.xyz
+    (function () {
+      const counterEl = document.getElementById("view-counter");
+      if (!counterEl) return;
+
+      const endpoint = "https://api.countapi.xyz/hit/r-al2025/page";
+
+      fetch(endpoint)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && typeof data.value === "number") {
+            counterEl.textContent = `Page views: ${data.value}`;
+          } else {
+            counterEl.textContent = "Page views: unavailable";
+          }
+        })
+        .catch(() => {
+          counterEl.textContent = "Page views: unavailable";
+        });
+    })();
+  </script>
 </body>
 </html>
